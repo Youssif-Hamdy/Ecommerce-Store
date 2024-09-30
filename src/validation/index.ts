@@ -27,3 +27,5 @@ export const loginSchema = yup
       .min(6, "Password should be at least 6 charachters."),
   })
   .required();
+
+  

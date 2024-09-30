@@ -10,23 +10,18 @@ import ErrorHandler from "../components/errors/ErrorHandler";
 import HomePage from "../pages";
 import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";
-import DetailsPage from "../pages/DetailsPage";
 import { auth } from "../components/firebaseConfig"; 
 import { onAuthStateChanged } from "firebase/auth"; 
 
-
 let userData: any = null;
-
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    
     userData = {
       uid: user.uid,
       email: user.email,
     };
   } else {
-    
     userData = null;
   }
 });
@@ -47,18 +42,7 @@ const router = createBrowserRouter(
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/details"
-          element={
-            <ProtectedRoute
-              isAllowed={!userData} 
-              redirectPath="/login"
-              data={userData}
-            >
-              <DetailsPage />
-            </ProtectedRoute>
-          }
-        />
+       
         <Route
           path="login"
           element={
@@ -83,6 +67,7 @@ const router = createBrowserRouter(
             </ProtectedRoute>
           }
         />
+      
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </>
